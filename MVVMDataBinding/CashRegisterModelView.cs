@@ -80,6 +80,19 @@ namespace MVVMDataBinding
             }
         }
 
+        public int Dollars
+        {
+            get => Drawer.Dollars;
+            set
+            {
+                if (Drawer.Dollars == value || value < 0) return;
+                var quantity = value - Drawer.Dollars;
+                if (quantity > 0) Drawer.AddCoin(Coins.Dollar, quantity);
+                else Drawer.RemoveCoin(Coins.Dollar, -quantity);
+                InvokePropertyChanged("Dollars");
+            }
+        }
+
         public int Ones
         {
             get => Drawer.Ones;
